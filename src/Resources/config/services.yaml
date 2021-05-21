@@ -1,0 +1,5 @@
+services:
+  arobases_sylius_professional_customer_plugin.form.extension.type.customer:
+    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\CustomerTypeExtension
+    tags:
+      - { name: form.type_extension, extended_type: Sylius\Bundle\CustomerBundle\Form\Type\CustomerType }

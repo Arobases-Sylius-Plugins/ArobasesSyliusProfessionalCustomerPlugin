@@ -1,0 +1,2 @@
+imports:
+  - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/grids.yaml" }

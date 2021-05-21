@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: Arobases\SyliusProfessionalCustomerPlugin
+        psr4_prefix: Arobases\SyliusProfessionalCustomerPlugin

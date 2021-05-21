@@ -1,0 +1,9 @@
+sylius_grid:
+  grids:
+    sylius_admin_customer:
+      filters:
+        isPro:
+          type: boolean
+          label: arobases_sylius_professional_customer.admin.is_pro
+          options:
+            field: isPro
