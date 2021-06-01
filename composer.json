@@ -55,7 +55,7 @@
     "autoload": {
         "psr-4": {
             "Arobases\\SyliusProfessionalCustomerPlugin\\": "src/",
-            "Tests\\Arobases\\SyliusProfessionalCustomerPlugin\\": "tests/Application/src"
+            "Tests\\Arobases\\SyliusProfessionalCustomerPlugin\\": "tests/Application/src/"
         }
     },
     "autoload-dev": {

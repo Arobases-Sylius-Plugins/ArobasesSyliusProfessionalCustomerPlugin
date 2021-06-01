@@ -1,5 +1,27 @@
 services:
   arobases_sylius_professional_customer_plugin.form.extension.type.customer:
     class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\CustomerTypeExtension
-    tags:
-      - { name: form.type_extension, extended_type: Sylius\Bundle\CustomerBundle\Form\Type\CustomerType }
+    autoconfigure: true
+
+  arobases_sylius_professional_customer_plugin.form.extension.type.channel:
+    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\ChannelTypeExtension
+    autoconfigure: true
+
+  arobases_sylius_professional_customer_plugin.form.type.promotion_rule.professional_customer_configuration:
+      class: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Rule\ProfessionalCustomerConfigurationType
+      autoconfigure: true
+
+  arobases_sylius_professional_customer_plugin.promotion_rule_checker.professional_customer:
+      class: Arobases\SyliusProfessionalCustomerPlugin\Promotion\Checker\Rule\ProfessionalCustomerRuleChecker
+      tags:
+        - { name: sylius.promotion_rule_checker, type: professional_customer, form_type: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Rule\ProfessionalCustomerConfigurationType, label: Professional Customer }
+
+  Arobases\SyliusProfessionalCustomerPlugin\Component\Core\OrderProcessing\OrderTaxesProcessor:
+    decorates: sylius.order_processing.order_taxes_processor
+    arguments:
+      - '@sylius.provider.channel_based_default_zone_provider'
+      - '@sylius.zone_matcher'
+      - '@sylius.registry.tax_calculation_strategy'
+      - '@sylius.context.customer'
+      - '@sylius.context.channel'
+

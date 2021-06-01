@@ -1,0 +1,4 @@
+arobases_sylius_professional_customer:
+  admin:
+    is_pro: is professional
+    consider_taxes_for_professional_customer: consider taxes for professional customer

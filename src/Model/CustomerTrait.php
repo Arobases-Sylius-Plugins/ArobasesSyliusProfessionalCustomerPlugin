@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Arobases\SyliusProfessionalCustomerPlugin\Model;
 
-
-
 use Doctrine\ORM\Mapping as ORM;
 
 trait CustomerTrait
@@ -31,7 +29,5 @@ trait CustomerTrait
     {
         $this->isPro = $isPro;
     }
-
-
 
 }

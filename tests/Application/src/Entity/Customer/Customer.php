@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Arobases\SyliusProfessionalCustomerPlugin\Application\src\Entity\Customer;
+namespace Tests\Arobases\SyliusProfessionalCustomerPlugin\Entity\Customer;
 
 use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerInterface;
 use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerTrait;

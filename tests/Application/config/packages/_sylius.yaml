@@ -20,4 +20,9 @@ sylius_customer:
     resources:
         customer:
             classes:
-                model: Tests\Arobases\SyliusProfessionalCustomerPlugin\Application\src\Entity\Customer\Customer
+                model: Tests\Arobases\SyliusProfessionalCustomerPlugin\Entity\Customer\Customer
+sylius_channel:
+    resources:
+        channel:
+            classes:
+                model: Tests\Arobases\SyliusProfessionalCustomerPlugin\Entity\Channel\Channel

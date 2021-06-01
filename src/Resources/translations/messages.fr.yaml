@@ -1,0 +1,4 @@
+arobases_sylius_professional_customer:
+  admin:
+    is_pro: est un professionnel
+    consider_taxes_for_professional_customer: compter le prix en HT pour les professionels
