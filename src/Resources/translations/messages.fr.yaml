@@ -1,4 +1,20 @@
 arobases_sylius_professional_customer:
+  email:
+    wait_verification: Vous recevrez un mail quand vos informations professionnelles seront vérifiées.
+    verification:
+      subject: 'Informations Clients Professionnelles verifiée'
+      verified: 'Vos informations Clients Professionnelles ont été verifiée, bienvenue'
+  ui:
+    professional_information: Information Professionelle
+    register: S'enregistrer en temps que professionel
+    register_in_the_store: S'inscrire sur le site en temps que professionnel
+    create_a_new_customer_account: Créer un nouveau compte professionel
+  form:
+    customer_pro:
+      siret: Siret
+      socialReason: Raison Sociale
+      vatNumber: Numero de TVA IntraCommunautaire
   admin:
-    is_pro: est un professionnel
-    consider_taxes_for_professional_customer: compter le prix en HT pour les professionels
+    is_pro: Est un professionnel
+    is_pro_verified: Est un professionnel vérifié
+    consider_taxes_for_professional_customer: Compter le prix en HT pour les professionels

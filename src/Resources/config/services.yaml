@@ -25,3 +25,16 @@ services:
       - '@sylius.context.customer'
       - '@sylius.context.channel'
 
+  Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer\CustomerProRegistrationType:
+    tags:
+      - { name: form.type }
+    arguments: ['%sylius.model.customer.class%', '%sylius.form.type.customer_registration.validation_groups%']
+
+  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProVerifiedListener:
+    arguments:
+      - '@sylius.email_sender'
+      - '@sylius.context.channel'
+      - '@sylius.context.locale'
+    tags:
+       - { name: kernel.event_listener, event: sylius.customer.post_update, method: sendUserProVerifiedEmail }
+

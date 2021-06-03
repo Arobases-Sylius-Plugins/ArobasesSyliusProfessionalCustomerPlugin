@@ -69,7 +69,10 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
             return;
         }
         if(null !== $this->customerContext->getCustomer()  ){
-            if($this->customerContext->getCustomer()->isPro() && $this->channelContext->getChannel()->getConsiderTaxesForProfessionalCustomer()){
+            if(
+                $this->customerContext->getCustomer()->isPro() &&
+                $this->customerContext->getCustomer()->isProVerified() &&
+                $this->channelContext->getChannel()->getConsiderTaxesForProfessionalCustomer()){
                 return;
             }
         }

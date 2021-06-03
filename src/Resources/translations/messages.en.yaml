@@ -1,4 +1,20 @@
 arobases_sylius_professional_customer:
+  email:
+    wait_verification: You will receive an email when your business information is verified.
+    verification:
+      subject: 'Business information verified'
+      verified: 'Your business information is verified, welcome'
+  ui:
+    professional_information: Business Information
+    register: Register as professional
+    register_in_the_store: Register in the store as professional
+    create_a_new_customer_account: Create a new professional account
+  form:
+    customer_pro:
+      siret: Siret
+      socialReason: Social Reason
+      vatNumber: Vat Number
   admin:
-    is_pro: is professional
-    consider_taxes_for_professional_customer: consider taxes for professional customer
+    is_pro: Is Professional
+    is_pro_verified: Is Professional Verfied
+    consider_taxes_for_professional_customer: Consider taxes for professional customer

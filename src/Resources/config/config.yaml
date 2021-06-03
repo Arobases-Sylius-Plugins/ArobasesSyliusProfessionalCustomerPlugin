@@ -1,2 +1,8 @@
 imports:
   - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/grids.yaml" }
+
+sylius_mailer:
+  emails:
+    customer_pro_confirmation:
+      subject: "A product has become out of stock!"
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/customer_pro_confirmation.html.twig"

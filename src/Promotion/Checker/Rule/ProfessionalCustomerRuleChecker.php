@@ -14,9 +14,13 @@ class ProfessionalCustomerRuleChecker implements RuleCheckerInterface
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
-        if($subject->getCustomer() !== null)
-             return $subject->getCustomer()->isPro();
-        else
+        if($subject->getCustomer() === null) {
             return false;
+        }
+        if(!$subject->getCustomer()->isPro() or !$subject->getCustomer()->isProVerified()) {
+            return false;
+        }
+
+        return true;
     }
 }

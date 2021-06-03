@@ -11,3 +11,16 @@ acme_sylius_example_dynamic_welcome:
     defaults:
         _controller: Acme\SyliusExamplePlugin\Controller\GreetingController::dynamicallyGreetAction
         name: ~
+
+sylius_pro_shop_register:
+    path: /pro_register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/pro_register.html.twig"
+            form: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer\CustomerProRegistrationType
+            event: register
+            redirect:
+                route: sylius_shop_account_dashboard
+            flash: arobases_sylius_professional_customer:customer:register

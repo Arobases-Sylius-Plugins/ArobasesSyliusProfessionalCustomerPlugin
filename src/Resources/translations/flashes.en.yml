@@ -1,0 +1,3 @@
+arobases_sylius_professional_customer:
+    customer:
+        register: "Thank you for registering as pro, check your email to verify your account, you will receive another email when your professional information is verified"

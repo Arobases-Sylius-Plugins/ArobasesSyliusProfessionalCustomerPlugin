@@ -17,7 +17,19 @@
             {{ form_row(form.phoneNumber) }}
             {{ form_row(form.subscribedToNewsletter) }}
             {{ form_row(form.isPro) }}
+
         </div>
+
+        {% if customer.isPro == true  %}
+            <div class="ui segment">
+                <h4 class="ui dividing header">{{ 'arobases_sylius_professional_customer.ui.professional_information'|trans }}</h4>
+                {{ form_row(form.isProVerified) }}
+
+                {{ form_row(form.siret) }}
+                {{ form_row(form.socialReason) }}
+                {{ form_row(form.vatNumber) }}
+            </div>
+        {% endif %}
     </div>
     <div class="column">
         <div class="ui segment">

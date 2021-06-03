@@ -1,0 +1,3 @@
+arobases_sylius_professional_customer:
+    customer:
+        register: 'Vous receverez un autre mail quand vos informations profesionnels seront vérifiés'
