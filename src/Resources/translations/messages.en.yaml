@@ -11,7 +11,9 @@ arobases_sylius_professional_customer:
     create_a_new_customer_account: Create a new professional account
   form:
     customer_pro:
-      siret: Siret
+      business_registration_number:
+        label: Business Registration Number
+        help: Your SIRET if you are in France or your IDE if you are in Switzerland
       socialReason: Social Reason
       vatNumber: Vat Number
   admin:

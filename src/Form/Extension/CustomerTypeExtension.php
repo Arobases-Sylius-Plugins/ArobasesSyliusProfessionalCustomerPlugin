@@ -12,7 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\AbstractComparison;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 class CustomerTypeExtension extends AbstractTypeExtension {
 
@@ -32,23 +34,39 @@ class CustomerTypeExtension extends AbstractTypeExtension {
                 $form = $event->getForm();
                 $customer = $event->getData();
                 if (true === $customer->isPro()){
-                    $form->add('siret', TextType::class, [
-                        'label' => 'arobases_sylius_professional_customer.form.customer_pro.siret',
+                    $form->add('businessRegistrationNumber', TextType::class, [
+                        'label' => 'arobases_sylius_professional_customer.form.customer_pro.business_registration_number.label',
+                        'help' => 'arobases_sylius_professional_customer.form.customer_pro.business_registration_number.help',
                         'constraints' => [
-                            new NotBlank([
-                                'message' => 'Choose a password!'
-                            ]),
-                        ]
+                            new NotBlank(['groups' => ['sylius']]),
+                        ],
                     ]);
                     $form->add('socialReason', TextType::class, [
                         'label' => 'arobases_sylius_professional_customer.form.customer_pro.socialReason',
+                        'constraints' => [
+                            new NotBlank(['groups' => ['sylius']]),
+                        ],
                     ]);
                     $form->add('vatNumber', TextType::class, [
                         'label' => 'arobases_sylius_professional_customer.form.customer_pro.vatNumber',
+                        'constraints' => [
+                            new NotBlank(['groups' => ['sylius']]),
+                        ],
                     ]);
-                    $form->add('isProVerified', CheckboxType::class, [
-                        'label' => 'arobases_sylius_professional_customer.admin.is_pro_verified',
-                    ]);
+
+                    if (true === $customer->isProVerified()) {
+                        $form->add('isProVerified', CheckboxType::class, [
+                            'label' => 'arobases_sylius_professional_customer.admin.is_pro_verified',
+                            'disabled' => true,
+                            'data' => true,
+                        ]);
+                    }
+                    else {
+                        $form->add('isProVerified', CheckboxType::class, [
+                            'label' => 'arobases_sylius_professional_customer.admin.is_pro_verified',
+                        ]);
+                    }
+
                 }
             });
     }

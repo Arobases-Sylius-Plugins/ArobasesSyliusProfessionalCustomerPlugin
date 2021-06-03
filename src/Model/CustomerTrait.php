@@ -24,7 +24,7 @@ trait CustomerTrait
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $siret = null;
+    protected $businessRegistrationNumber = null;
 
     /**
      * @var string
@@ -73,17 +73,17 @@ trait CustomerTrait
     /**
      * @return string
      */
-    public function getSiret(): ?string
+    public function getBusinessRegistrationNumber(): ?string
     {
-        return $this->siret;
+        return $this->businessRegistrationNumber;
     }
 
     /**
-     * @param ?string $siret
+     * @param ?string $businessRegistrationNumber
      */
-    public function setSiret(?string $siret): void
+    public function setBusinessRegistrationNumber(?string $businessRegistrationNumber): void
     {
-        $this->siret = $siret;
+        $this->businessRegistrationNumber = $businessRegistrationNumber;
     }
 
     /**

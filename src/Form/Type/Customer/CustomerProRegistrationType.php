@@ -37,25 +37,25 @@ final class CustomerProRegistrationType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.customer.subscribed_to_newsletter',
             ])
-            ->add('siret', TextType::class, [
-                'label' => 'arobases_sylius_professional_customer.form.customer_pro.siret',
+            ->add('businessRegistrationNumber', TextType::class, [
+                'label' => 'arobases_sylius_professional_customer.form.customer_pro.business_registration_number.label',
+                'help' => 'arobases_sylius_professional_customer.form.customer_pro.business_registration_number.help',
                 'required' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Choose a password!'
-                    ]),
-                    new Length([
-                        'min' => 14,
-                        'max' => 14,
-                    ]),
-                    new Unique()
-                ]
+                    new NotBlank(['groups' => ['sylius']]),
+                ],
             ])
             ->add('socialReason', TextType::class, [
                 'label' => 'arobases_sylius_professional_customer.form.customer_pro.socialReason',
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                ],
             ])
             ->add('vatNumber', TextType::class, [
                 'label' => 'arobases_sylius_professional_customer.form.customer_pro.vatNumber',
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                ],
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 /** @var Customer $customer */

@@ -14,9 +14,9 @@ interface CustomerInterface
 
     public function setIsProVerified(bool $isProVerified): void;
 
-    public function getSiret(): ?string;
+    public function getBusinessRegistrationNumber(): ?string;
 
-    public function setSiret(string $siret): void;
+    public function setBusinessRegistrationNumber(string $businessRegistrationNumber): void;
 
     public function getVatNumber(): ?string;
 
