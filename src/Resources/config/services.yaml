@@ -38,3 +38,24 @@ services:
     tags:
        - { name: kernel.event_listener, event: sylius.customer.post_update, method: sendUserProVerifiedEmail }
 
+  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader:
+    parent: Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploader
+
+  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploader:
+    arguments:
+      - '@filesystem'
+      - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider'
+      - '%kernel.project_dir%/public/'
+      - 'userfile/kbis'
+
+  Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider:
+    arguments:
+      - '@filesystem'
+
+  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProKbisListener:
+    arguments:
+      - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader'
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: kernel.event_listener , event: sylius.customer.post_register, method: preCreate } #sylius_event_listener
+

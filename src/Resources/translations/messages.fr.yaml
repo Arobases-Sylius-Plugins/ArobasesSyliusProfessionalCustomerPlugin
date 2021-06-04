@@ -6,11 +6,16 @@ arobases_sylius_professional_customer:
       verified: 'Vos informations Clients Professionnelles ont été verifiée, bienvenue'
   ui:
     professional_information: Information Professionelle
+    kbis: KBIS
+    display_fail: Il semble que votre navigateur Web ne soit pas configuré pour afficher les fichiers PDF.
+    download: Cliquez ici pour télécharger le fichier PDF.
     register: S'enregistrer en temps que professionel
     register_in_the_store: S'inscrire sur le site en temps que professionnel
     create_a_new_customer_account: Créer un nouveau compte professionel
   form:
     customer_pro:
+      mime_types_message: Le fichier doit être de type PDF et doit faire moins de 20mo
+      kbis: Extrait de votre kbis au format PDF
       business_registration_number:
         label: Business Registration Number
         help: Votre SIRET si vous etes en france ou votre IDE si vous etes en suisse

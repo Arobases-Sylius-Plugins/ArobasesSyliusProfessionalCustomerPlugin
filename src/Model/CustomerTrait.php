@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arobases\SyliusProfessionalCustomerPlugin\Model;
 
+use Arobases\SyliusProfessionalCustomerPlugin\Entity\KbisImage;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CustomerTrait
@@ -37,6 +39,44 @@ trait CustomerTrait
      * @ORM\Column(type="text", nullable=true)
      */
     protected $vatNumber = null;
+
+    /**
+     * @ORM\Column(type="string", length=511, nullable=true)
+     */
+    protected ?string $filePath = null;
+    protected ?File $file = null;
+
+    /**
+     * @return string|null
+     */
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    /**
+     * @param string|null $filePath
+     */
+    public function setFilePath(string $filePath): void
+    {
+        $this->filePath = $filePath;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File|null $file
+     */
+    public function setFile(?File $file): void
+    {
+        $this->file = $file;
+    }
 
     /**
      * @return bool

@@ -8,13 +8,13 @@ use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Customer\Model\Customer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Unique;
+use Symfony\Component\Validator\Constraints\File;
 
 final class CustomerProRegistrationType extends AbstractResourceType
 {
@@ -57,6 +57,24 @@ final class CustomerProRegistrationType extends AbstractResourceType
                     new NotBlank(['groups' => ['sylius']]),
                 ],
             ])
+            ->add('file', FileType::class, [
+                'label' => 'arobases_sylius_professional_customer.form.customer_pro.kbis',
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                    new File([
+                        'groups' => ['sylius'],
+                        'maxSize' => '20M',
+                        'mimeTypes' => [
+                            'application/pdf',
+
+                        ],
+                        'mimeTypesMessage' => 'arobases_sylius_professional_customer.form.customer_pro.mime_types_message'
+                    ])
+                ]
+
+            ])
+
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 /** @var Customer $customer */
                  $customer = $event->getData();
