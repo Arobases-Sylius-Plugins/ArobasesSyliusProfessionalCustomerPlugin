@@ -6,8 +6,10 @@ arobases_sylius_professional_customer:
       verified: 'Your business information is verified, welcome'
   ui:
     professional_information: Business Information
+    manage_your_business_information_and_preferences: Manage your business information and preferences
     kbis: KBIS
     register: Register as professional
+    my_account: My Account (Professional)
     download: Click here to download the PDF file.
     register_in_the_store: Register in the store as professional
     create_a_new_customer_account: Create a new professional account

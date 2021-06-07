@@ -24,3 +24,15 @@ sylius_pro_shop_register:
             redirect:
                 route: sylius_shop_account_dashboard
             flash: arobases_sylius_professional_customer:customer:register
+
+sylius_pro_shop_account_dashboard:
+    path: /pro_dashboard
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer:showAction
+        _sylius:
+            template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Account/dashboard_pro.html.twig"
+            repository:
+                method: find
+                arguments:
+                    - "expr:service('sylius.context.customer').getCustomer()"

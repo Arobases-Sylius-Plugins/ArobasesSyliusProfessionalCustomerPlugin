@@ -1,16 +1,4 @@
 services:
-  arobases_sylius_professional_customer_plugin.form.extension.type.customer:
-    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\CustomerTypeExtension
-    autoconfigure: true
-
-  arobases_sylius_professional_customer_plugin.form.extension.type.channel:
-    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\ChannelTypeExtension
-    autoconfigure: true
-
-  arobases_sylius_professional_customer_plugin.form.type.promotion_rule.professional_customer_configuration:
-      class: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Rule\ProfessionalCustomerConfigurationType
-      autoconfigure: true
-
   arobases_sylius_professional_customer_plugin.promotion_rule_checker.professional_customer:
       class: Arobases\SyliusProfessionalCustomerPlugin\Promotion\Checker\Rule\ProfessionalCustomerRuleChecker
       tags:
@@ -25,11 +13,6 @@ services:
       - '@sylius.context.customer'
       - '@sylius.context.channel'
 
-  Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer\CustomerProRegistrationType:
-    tags:
-      - { name: form.type }
-    arguments: ['%sylius.model.customer.class%', '%sylius.form.type.customer_registration.validation_groups%']
-
   Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProVerifiedListener:
     arguments:
       - '@sylius.email_sender'
@@ -38,24 +21,8 @@ services:
     tags:
        - { name: kernel.event_listener, event: sylius.customer.post_update, method: sendUserProVerifiedEmail }
 
-  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader:
-    parent: Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploader
-
-  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploader:
+  Arobases\SyliusProfessionalCustomerPlugin\Menu\AccountMenuListener:
     arguments:
-      - '@filesystem'
-      - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider'
-      - '%kernel.project_dir%/public/'
-      - 'userfile/kbis'
-
-  Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider:
-    arguments:
-      - '@filesystem'
-
-  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProKbisListener:
-    arguments:
-      - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader'
-      - '@doctrine.orm.entity_manager'
+      - '@sylius.context.customer'
     tags:
-      - { name: kernel.event_listener , event: sylius.customer.post_register, method: preCreate } #sylius_event_listener
-
+      - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }

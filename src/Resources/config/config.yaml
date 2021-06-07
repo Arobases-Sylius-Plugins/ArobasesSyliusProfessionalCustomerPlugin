@@ -1,5 +1,7 @@
 imports:
   - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/grids.yaml" }
+  - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/files_uploader.yaml" }
+  - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/forms.yaml" }
 
 sylius_mailer:
   emails:

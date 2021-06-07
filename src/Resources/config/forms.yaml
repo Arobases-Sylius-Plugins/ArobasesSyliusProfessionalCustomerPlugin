@@ -1,0 +1,17 @@
+services:
+  arobases_sylius_professional_customer_plugin.form.extension.type.customer:
+    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\CustomerTypeExtension
+    autoconfigure: true
+
+  arobases_sylius_professional_customer_plugin.form.extension.type.channel:
+    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Extension\ChannelTypeExtension
+    autoconfigure: true
+
+  arobases_sylius_professional_customer_plugin.form.type.promotion_rule.professional_customer_configuration:
+    class: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Rule\ProfessionalCustomerConfigurationType
+    autoconfigure: true
+
+  Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer\CustomerProRegistrationType:
+    tags:
+      - { name: form.type }
+    arguments: ['%sylius.model.customer.class%', '%sylius.form.type.customer_registration.validation_groups%']

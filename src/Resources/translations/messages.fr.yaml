@@ -6,10 +6,12 @@ arobases_sylius_professional_customer:
       verified: 'Vos informations Clients Professionnelles ont été verifiée, bienvenue'
   ui:
     professional_information: Information Professionelle
+    manage_your_business_information_and_preferences: Gérer vos informations et préférences professionnelles
     kbis: KBIS
     display_fail: Il semble que votre navigateur Web ne soit pas configuré pour afficher les fichiers PDF.
     download: Cliquez ici pour télécharger le fichier PDF.
     register: S'enregistrer en temps que professionel
+    my_account: My Account (Professionel)
     register_in_the_store: S'inscrire sur le site en temps que professionnel
     create_a_new_customer_account: Créer un nouveau compte professionel
   form:
