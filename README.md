@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">Plugin Skeleton</h1>
+<h1 align="center">ArobasesSyliusProfessionalCustomerPlugin</h1>
 
 <p align="center">Skeleton for starting Sylius plugins.</p>
 
@@ -15,98 +15,89 @@ there you will find the <a href="https://docs.sylius.com/en/latest/plugin-develo
 
 ## Quickstart Installation
 
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
+### 1. Require plugin with composer:
+```sh
+composer require arobases/sylius-professional-customer-plugin
+```
+### 3. Import configuration:
+```yml
+#config/packages/arobases_sylius_professional_customer.yaml
+imports:
+    - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/config.yaml" }
+```
 
-2. From the plugin skeleton root directory, run the following commands:
+### 4. Import routing:
+```yml
+# config/routes.yaml
+arobases_sylius_professional_customer_shop:
+    resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/shop_routing.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
 
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
-    
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
+arobases_sylius_professional_customer_admin:
+    resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/admin_routing.yml"
+    prefix: /admin
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+```
+### 5. Add plugin class to your bundles.php:
+```php
+$bundles = [
+    // ...
+    Arobases\SyliusProfessionalCustomerPlugin\ArobasesSyliusProfessionalCustomerPlugin::class => ['all' => true],
+    // ...
+];
+```
+### 5. Use CustomerTrait and CustomerInterface:
+```php
+<?php
 
-## Usage
+//src/Entity/Customer/Customer.php
 
-### Running plugin tests
+declare(strict_types=1);
 
-  - PHPUnit
+namespace App\Entity\Customer;
 
-    ```bash
-    vendor/bin/phpunit
-    ```
+use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerInterface;
+use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="sylius_customer")
+ */
+class Customer extends BaseCustomer implements CustomerInterface
+{
+    use CustomerTrait;
+}
 
-  - PHPSpec
+```
+### 6. Use ChannelTrait and ChannelInterface:
 
-    ```bash
-    vendor/bin/phpspec run
-    ```
+```php
 
-  - Behat (non-JS scenarios)
+<?php
+//src/Entity/Channel/Channel.php
 
-    ```bash
-    vendor/bin/behat --strict --tags="~@javascript"
-    ```
+declare(strict_types=1);
 
-  - Behat (JS scenarios)
- 
-    1. [Install Symfony CLI command](https://symfony.com/download).
- 
-    2. Start Headless Chrome:
-    
-      ```bash
-      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-      ```
-    
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-    
-      ```bash
-      symfony server:ca:install
-      APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
-      ```
-    
-    4. Run Behat:
-    
-      ```bash
-      vendor/bin/behat --strict --tags="@javascript"
-      ```
-    
-  - Static Analysis
-  
-    - Psalm
-    
-      ```bash
-      vendor/bin/psalm
-      ```
-      
-    - PHPStan
-    
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
+namespace App\Entity\Channel;
 
-  - Coding Standard
-  
-    ```bash
-    vendor/bin/ecs check src
-    ```
+use Arobases\SyliusProfessionalCustomerPlugin\Model\ChannelInterface;
+use Arobases\SyliusProfessionalCustomerPlugin\Model\ChannelTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Core\Model\Channel as BaseChannel;
 
-### Opening Sylius with your plugin
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="sylius_channel")
+ */
+class Channel extends BaseChannel implements ChannelInterface
+{
+    use ChannelTrait;
+}
+```
+### 7. Update the schema
 
-- Using `test` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
-    ```
-    
-- Using `dev` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
-    ```
+```bash
+php bin/console doctrine:schema:update --force
