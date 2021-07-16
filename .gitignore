@@ -11,4 +11,5 @@
 /behat.yml
 /phpspec.yml
 /phpunit.xml
-.idea
+/.idea
+/.idea/*
