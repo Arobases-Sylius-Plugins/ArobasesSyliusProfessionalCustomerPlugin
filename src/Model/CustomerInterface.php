@@ -6,7 +6,7 @@ namespace Arobases\SyliusProfessionalCustomerPlugin\Model;
 
 interface CustomerInterface
 {
-    public function isPro(): bool;
+    public function isPro(): ?bool;
 
     public function setIsPro(bool $isPro): void;
 

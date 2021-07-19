@@ -6,7 +6,7 @@ namespace Arobases\SyliusProfessionalCustomerPlugin\Model;
 
 interface ChannelInterface
 {
-    public function getConsiderTaxesForProfessionalCustomer(): bool;
+    public function getConsiderTaxesForProfessionalCustomer(): ?bool;
 
     public function setConsiderTaxesForProfessionalCustomer(bool $considerTaxesForProfessionalCustomer): void;
 }

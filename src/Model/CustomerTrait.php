@@ -81,7 +81,7 @@ trait CustomerTrait
     /**
      * @return bool
      */
-    public function isPro(): bool
+    public function isPro(): ?bool
     {
         return $this->isPro;
     }

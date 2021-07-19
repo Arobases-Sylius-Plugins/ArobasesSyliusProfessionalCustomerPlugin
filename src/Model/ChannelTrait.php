@@ -17,7 +17,7 @@ trait ChannelTrait
     /**
      * @return bool
      */
-    public function getConsiderTaxesForProfessionalCustomer(): bool
+    public function getConsiderTaxesForProfessionalCustomer(): ?bool
     {
         return $this->considerTaxesForProfessionalCustomer;
     }

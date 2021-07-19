@@ -101,3 +101,70 @@ class Channel extends BaseChannel implements ChannelInterface
 
 ```bash
 php bin/console doctrine:schema:update --force
+```
+### 8. Copy templates
+
+#### 8.1 Copy Channel templates
+
+Extend the Channel Admin Form template 
+`vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/views/Channel/_form.html.twig`
+And Add considerTaxesForProfessionalCustomer form
+```twig
+{# templates/bundles/SyliusAdminBundle/Channel/_form.html.twig #}
+{{ form_row(form.considerTaxesForProfessionalCustomer) }}
+```
+
+#### 8.2 Copy Customer templates
+
+Extend the Customer Admin Form template
+`vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/views/Customer/_form.html.twig`
+And Add considerTaxesForProfessionalCustomer form
+```twig
+{# templates/bundles/SyliusAdminBundle/Customer/_form.html.twig #}
+{{ form_row(form.isPro) }}
+```
+
+```twig
+        {% if customer.isPro == true  %}
+                <div class="ui segment">
+                    <h4 class="ui dividing header">{{ 'arobases_sylius_professional_customer.ui.professional_information'|trans }}</h4>
+                    {{ form_row(form.isProVerified) }}
+                    {{ form_row(form.businessRegistrationNumber) }}
+                    {{ form_row(form.socialReason) }}
+                    {{ form_row(form.vatNumber) }}
+                </div>
+                {% if customer.filePath is not null  %}
+                <div class="ui segment">
+                    <h4 class="ui dividing header">{{ 'arobases_sylius_professional_customer.ui.kbis'|trans }}</h4>
+                    <object type="application/pdf" width="100%" height="100%">
+                        <param name="src" value="{{ asset(customer.filePath) }}" />
+                        {{ 'arobases_sylius_professional_customer.ui.display_fail'|trans }}
+                    </object>
+                     <a href="{{ asset(customer.filePath) }}">{{ 'arobases_sylius_professional_customer.ui.download'|trans }}</a>
+                </div>
+                {% endif %}
+        {% endif %}
+
+```
+
+#### 8.3 Copy Menu templates
+Extend the Menu template
+`vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Menu/_security.html.twig`
+```twig
+{# templates/bundles/SyliusShopBundle/Menu/_security.html.twig #}
+<div class="ui right stackable inverted menu">
+    {% if is_granted('ROLE_USER') %}
+        <div class="item" {{ sylius_test_html_attribute('full-name') }}>{{ 'sylius.ui.hello'|trans }} {{ app.user.customer.fullName }}!</div>
+            {% if true == app.user.customer.isPro %}
+                    <a href="{{ path('sylius_shop_account_dashboard') }}" class="item">{{ 'arobases_sylius_professional_customer.ui.my_account'|trans }}</a>
+            {% else %}
+                    <a href="{{ path('sylius_shop_account_dashboard') }}" class="item">{{ 'sylius.ui.my_account'|trans }}</a>
+            {% endif %}
+        <a href="{{ path('sylius_shop_logout') }}" class="item sylius-logout-button" {{ sylius_test_html_attribute('logout-button') }}>{{ 'sylius.ui.logout'|trans }}</a>
+    {% else %}
+        <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.login'|trans }}</a>
+        <a href="{{ path('sylius_shop_register') }}" class="item">{{ 'sylius.ui.register'|trans }}</a>
+        <a href="{{ path('sylius_pro_shop_register') }}" class="item">{{ 'arobases_sylius_professional_customer.ui.register'|trans }}</a>
+    {% endif %}
+</div>
+```
