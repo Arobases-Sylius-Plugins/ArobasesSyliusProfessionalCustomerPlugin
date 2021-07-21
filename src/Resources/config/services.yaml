@@ -13,16 +13,15 @@ services:
       - '@sylius.context.customer'
       - '@sylius.context.channel'
 
-  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProVerifiedListener:
-    arguments:
-      - '@sylius.email_sender'
-      - '@sylius.context.channel'
-      - '@sylius.context.locale'
-    tags:
-       - { name: kernel.event_listener, event: sylius.customer.post_update, method: sendUserProVerifiedEmail }
-
   Arobases\SyliusProfessionalCustomerPlugin\Menu\AccountMenuListener:
     arguments:
       - '@sylius.context.customer'
     tags:
       - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }
+
+  Arobases\SyliusProfessionalCustomerPlugin\EventListener\MailerListener:
+    decorates: 'sylius.listener.user_mailer_listener'
+    arguments:
+      - '@sylius.email_sender'
+      - '@sylius.context.channel'
+      - '@sylius.context.locale'

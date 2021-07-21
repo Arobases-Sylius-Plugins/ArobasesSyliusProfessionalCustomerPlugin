@@ -1,9 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Arobases\SyliusProfessionalCustomerPlugin\EventListener;
 
+use Sylius\Bundle\CoreBundle\Mailer\Emails as CoreBundleEmails;
+use Sylius\Bundle\UserBundle\Mailer\Emails as UserBundleEmails;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -12,17 +23,15 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
+use  Sylius\Bundle\CoreBundle\EventListener\MailerListener as BaseMailerListener;
 
-final class CustomerProVerifiedListener
+final class MailerListener
 {
-    /** @var SenderInterface */
-    private $emailSender;
+    private SenderInterface $emailSender;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var LocaleContextInterface */
-    private $localeContext;
+    private LocaleContextInterface $localeContext;
 
     public function __construct(
         SenderInterface $emailSender,
@@ -34,7 +43,22 @@ final class CustomerProVerifiedListener
         $this->localeContext = $localeContext;
     }
 
-    public function sendUserProVerifiedEmail(GenericEvent $event): void
+    public function sendResetPasswordTokenEmail(GenericEvent $event): void
+    {
+        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_TOKEN);
+    }
+
+    public function sendResetPasswordPinEmail(GenericEvent $event): void
+    {
+        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_PIN);
+    }
+
+    public function sendVerificationTokenEmail(GenericEvent $event): void
+    {
+        $this->sendEmail($event->getSubject(), UserBundleEmails::EMAIL_VERIFICATION_TOKEN);
+    }
+
+    public function sendUserRegistrationEmail(GenericEvent $event): void
     {
         $customer = $event->getSubject();
 
@@ -52,8 +76,11 @@ final class CustomerProVerifiedListener
 
         Assert::isInstanceOf($user, ShopUserInterface::class);
 
-        if ($customer->isProVerified()) {
-            $this->sendEmail($user, 'customer_pro_confirmation');
+        if ($customer->isPro()) {
+            $this->sendEmail($user, 'user_registration_pro');
+        }
+        else {
+            $this->sendEmail($user, CoreBundleEmails::USER_REGISTRATION);
         }
     }
 
