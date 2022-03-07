@@ -26,10 +26,10 @@ services:
       - '@sylius.context.channel'
       - '@sylius.context.locale'
 
-  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProVerifiedListener:
-    arguments:
-      - '@sylius.email_sender'
-      - '@sylius.context.channel'
-      - '@sylius.context.locale'
-    tags:
-      - { name: kernel.event_listener , event: sylius.user.post_email_verification, method: sendCustomerProVerifiedEmail }
+#  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProVerifiedListener:
+#    arguments:
+#      - '@sylius.email_sender'
+#      - '@sylius.context.channel'
+#      - '@sylius.context.locale'
+#    tags:
+#      - { name: kernel.event_listener , event: sylius.user.post_email_verification, method: sendCustomerProVerifiedEmail }
