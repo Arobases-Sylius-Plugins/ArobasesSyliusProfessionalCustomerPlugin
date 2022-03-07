@@ -2,24 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\EntityListener;
+namespace Arobases\SyliusProfessionalCustomerPlugin\EventListener;
 
-use App\Entity\Channel\Channel;
-use App\Entity\Product\Product;
-use App\Entity\Product\ProductTaxon;
-use App\Entity\Taxonomy\Taxon;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
