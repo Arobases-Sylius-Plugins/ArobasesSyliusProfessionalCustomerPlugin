@@ -109,17 +109,11 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
     }
 
-    private function clearTaxes(OrderInterface $order): void
+    private function clearTaxes(BaseOrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
-
         foreach ($order->getItems() as $item) {
             $item->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT);
-        }
-
-        /** @var ShipmentInterface $shipment */
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
     }
 }
