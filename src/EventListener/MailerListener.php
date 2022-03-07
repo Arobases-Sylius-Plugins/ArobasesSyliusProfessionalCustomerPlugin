@@ -79,9 +79,6 @@ final class MailerListener
         if ($customer->isPro()) {
             $this->sendEmail($user, 'user_registration_pro');
         }
-        else {
-            $this->sendEmail($user, CoreBundleEmails::USER_REGISTRATION);
-        }
     }
 
     private function sendEmail(UserInterface $user, string $emailCode): void
