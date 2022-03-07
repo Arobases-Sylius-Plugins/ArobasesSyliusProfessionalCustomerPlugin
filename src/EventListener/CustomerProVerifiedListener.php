@@ -40,6 +40,7 @@ final class CustomerProVerifiedListener
 
     public function sendCustomerProVerifiedEmail(GenericEvent $event): void
     {
+        die;('aa');
         /** @var CustomerInterface $newCustomer */
         $user = $event->getSubject();
 
@@ -50,7 +51,7 @@ final class CustomerProVerifiedListener
 
         if ($channel->isAccountVerificationRequired() && $user->getCustomer()->isPro()) {
 
-            //   dump($newCustomer);die;
+            dump($newCustomer);die;
             $this->sendEmail($user, 'user_registration_pro');
         }
     }
