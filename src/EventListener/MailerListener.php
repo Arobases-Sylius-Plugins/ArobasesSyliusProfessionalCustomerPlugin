@@ -60,6 +60,10 @@ final class MailerListener
 
     public function sendUserRegistrationEmail(GenericEvent $event): void
     {
+        if ($this->channelContext->getChannel()->isAccountVerificationRequired()) {
+            return;
+        }
+
         $customer = $event->getSubject();
 
         Assert::isInstanceOf($customer, CustomerInterface::class);
