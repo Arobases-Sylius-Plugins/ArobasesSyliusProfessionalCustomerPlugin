@@ -1,10 +1,11 @@
 {
-    "name": "arobases/sylius-professional-customer-plugin",
+    "name": "arobases-sylius-public/sylius-professional-customer-plugin",
     "type": "sylius-plugin",
     "description": "Plugin allowing to add professional customer to your shop",
     "keywords": [
         "sylius",
-        "sylius-plugin"
+        "sylius-plugin",
+        "arobases-sylius-plugin"
     ],
     "license": "MIT",
     "require": {
