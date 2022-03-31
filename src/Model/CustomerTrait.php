@@ -22,6 +22,14 @@ trait CustomerTrait
      */
     protected $isProVerified = false ;
 
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", nullable=true,  options={"default":"0"})
+     */
+    protected $proVerifiedEmailSend = false ;
+
+
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
@@ -45,6 +53,22 @@ trait CustomerTrait
      */
     protected ?string $filePath = null;
     protected ?File $file = null;
+
+    /**
+     * @return bool
+     */
+    public function isProVerifiedEmailSend(): bool
+    {
+        return $this->proVerifiedEmailSend;
+    }
+
+    /**
+     * @param bool $proVerifiedEmailSend
+     */
+    public function setProVerifiedEmailSend(bool $proVerifiedEmailSend): void
+    {
+        $this->proVerifiedEmailSend = $proVerifiedEmailSend;
+    }
 
     /**
      * @return string|null

@@ -34,3 +34,12 @@ services:
       - "@sylius.repository.customer"
     tags:
       - { name: kernel.event_listener , event: sylius.user.post_email_verification, method: sendCustomerProVerifiedEmail }
+
+  Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProAcceptedListener:
+    arguments:
+      - '@sylius.email_sender'
+      - '@sylius.context.channel'
+      - '@sylius.context.locale'
+      - "@sylius.repository.customer"
+    tags:
+      - { name: kernel.event_listener , event: sylius.customer.pre_update, method: sendCustomerProAcceptedEmail }
