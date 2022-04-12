@@ -26,3 +26,6 @@ arobases_sylius_professional_customer:
     is_pro: Is Professional
     is_pro_verified: Is Professional Verfied
     consider_taxes_for_professional_customer: Consider taxes for professional customer
+  menu:
+    ui:
+      professional_information: Professional information
