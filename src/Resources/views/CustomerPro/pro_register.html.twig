@@ -13,7 +13,7 @@
     <div class="ui padded segment">
         {{ sylius_template_event('sylius.shop.register.before_form') }}
 
-        {{ form_start(form, {'action': path('sylius_pro_shop_register'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('arobases_sylius_professional_customer_shop_register'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         {% include '@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/_form.html.twig' %}
 
         {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
