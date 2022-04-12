@@ -5,7 +5,7 @@ arobases_sylius_professional_customer:
       subject: 'Informations Clients Professionnelles verifiée'
       verified: 'Vos informations Clients Professionnelles ont été verifiée, bienvenue'
   ui:
-    professional_information: Information Professionelle
+    professional_information: Informations Professionelles
     manage_your_business_information_and_preferences: Gérer vos informations et préférences professionnelles
     kbis: KBIS
     display_fail: Il semble que votre navigateur Web ne soit pas configuré pour afficher les fichiers PDF.
@@ -27,3 +27,6 @@ arobases_sylius_professional_customer:
     is_pro: Est un professionnel
     is_pro_verified: Est un professionnel vérifié
     consider_taxes_for_professional_customer: Compter le prix en HT pour les professionels
+  menu:
+    ui:
+      professional_information: Informations professionnelles
