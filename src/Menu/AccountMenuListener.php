@@ -29,8 +29,8 @@ final class AccountMenuListener
         }
         $menu = $event->getMenu();
         $menu
-            ->addChild('new', ['route' => 'sylius_pro_shop_account_dashboard'])
-            ->setLabel('Menu Pro')
+            ->addChild('new', ['route' => 'arobases_sylius_professional_customer_shop_account_dashboard:'])
+            ->setLabel('arobases_sylius_professional_customer.menu.ui.professional_customer')
             ->setLabelAttribute('icon', 'star')
         ;
     }
