@@ -17,7 +17,7 @@ there you will find the <a href="https://docs.sylius.com/en/latest/plugin-develo
 
 ### 1. Require plugin with composer:
 ```sh
-composer require arobases/sylius-professional-customer-plugin
+composer require arobases-sylius-public/sylius-customer-support-plugin
 ```
 ### 3. Import configuration:
 ```yml
