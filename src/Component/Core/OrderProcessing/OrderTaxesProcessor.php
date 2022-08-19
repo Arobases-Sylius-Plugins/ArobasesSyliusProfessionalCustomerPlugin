@@ -115,5 +115,9 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         foreach ($order->getItems() as $item) {
             $item->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT);
         }
+        /** @var ShipmentInterface $shipment */
+        foreach ($order->getShipments() as $shipment) {
+            $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
+        }
     }
 }
