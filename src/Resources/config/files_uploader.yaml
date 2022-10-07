@@ -7,7 +7,7 @@ services:
       - '@filesystem'
       - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider'
       - '%kernel.project_dir%/public/'
-      - 'userfile/kbis'
+      - 'userfiles/kbis'
 
   Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider:
     arguments:

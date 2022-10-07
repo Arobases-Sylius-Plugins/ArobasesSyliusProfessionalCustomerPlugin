@@ -7,6 +7,7 @@ namespace Arobases\SyliusProfessionalCustomerPlugin\EventListener;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -40,8 +41,7 @@ final class CustomerProVerifiedListener
 
     public function sendCustomerProVerifiedEmail(GenericEvent $event): void
     {
-
-        /** @var CustomerInterface $newCustomer */
+        /** @var ShopUser $user */
         $user = $event->getSubject();
 
         Assert::isInstanceOf($user, ShopUserInterface::class);
@@ -50,15 +50,18 @@ final class CustomerProVerifiedListener
         $channel = $this->channelContext->getChannel();
 
         if ($channel->isAccountVerificationRequired() && $user->getCustomer()->isPro()) {
-            $this->sendEmail($user, 'user_registration_pro');
+            $this->sendEmail($user, 'user_registration_pro', $user->getEmail());
+            if($channel->getContactEmail() !== null){
+                $this->sendEmail($user, 'admin_customer_pro_notification', $channel->getContactEmail());
+            }
         }
     }
 
-    private function sendEmail(UserInterface $user, string $emailCode): void
+    private function sendEmail(UserInterface $user, string $emailCode, string $recipientEmail): void
     {
         $this->emailSender->send(
             $emailCode,
-            [$user->getEmail()],
+            [$recipientEmail],
             [
                 'user' => $user,
                 'channel' => $this->channelContext->getChannel(),
@@ -66,7 +69,6 @@ final class CustomerProVerifiedListener
             ]
         );
     }
-
 }
 
 

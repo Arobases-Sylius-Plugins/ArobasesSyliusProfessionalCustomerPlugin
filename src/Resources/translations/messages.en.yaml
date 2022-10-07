@@ -4,10 +4,14 @@ arobases_sylius_professional_customer:
     verification:
       subject: 'Business information verified'
       verified: 'Your business information is verified, welcome'
+    notification:
+      subject: 'A new customer professional registered'
+      content: "A new professional user has just registered, you must validate his account in your back office"
   ui:
     professional_information: Business Information
     manage_your_business_information_and_preferences: Manage your business information and preferences
     kbis: KBIS
+    display_fail: It looks like your web browser is not configured to view PDF files.
     register: Register as professional
     my_account: My Account (Professional)
     download: Click here to download the PDF file.

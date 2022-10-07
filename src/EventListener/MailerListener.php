@@ -23,7 +23,6 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
-use  Sylius\Bundle\CoreBundle\EventListener\MailerListener as BaseMailerListener;
 
 final class MailerListener
 {
@@ -45,22 +44,23 @@ final class MailerListener
 
     public function sendResetPasswordTokenEmail(GenericEvent $event): void
     {
-        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_TOKEN);
+        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_TOKEN,$event->getSubject()->getEmail());
     }
 
     public function sendResetPasswordPinEmail(GenericEvent $event): void
     {
-        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_PIN);
+        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_PIN, $event->getSubject()->getEmail());
     }
 
     public function sendVerificationTokenEmail(GenericEvent $event): void
     {
-        $this->sendEmail($event->getSubject(), UserBundleEmails::EMAIL_VERIFICATION_TOKEN);
+        $this->sendEmail($event->getSubject(), UserBundleEmails::EMAIL_VERIFICATION_TOKEN, $event->getSubject()->getEmail());
     }
 
     public function sendUserRegistrationEmail(GenericEvent $event): void
     {
-        if ($this->channelContext->getChannel()->isAccountVerificationRequired()) {
+        $channel = $this->channelContext->getChannel();
+        if ($channel->isAccountVerificationRequired()) {
             return;
         }
 
@@ -68,6 +68,7 @@ final class MailerListener
 
         Assert::isInstanceOf($customer, CustomerInterface::class);
 
+        /** @var ShopUserInterface $user */
         $user = $customer->getUser();
         if (null === $user) {
             return;
@@ -80,16 +81,22 @@ final class MailerListener
 
         Assert::isInstanceOf($user, ShopUserInterface::class);
 
+
         if ($customer->isPro()) {
-            $this->sendEmail($user, 'user_registration_pro');
+            $this->sendEmail($user, 'user_registration_pro', $user->getEmail());
+            if($channel->getContactEmail() !== null){
+                $this->sendEmail($user, 'admin_customer_pro_notification', $channel->getContactEmail());
+            }
+        }else{
+            $this->sendEmail($user, CoreBundleEmails::USER_REGISTRATION, $user->getEmail());
         }
     }
 
-    private function sendEmail(UserInterface $user, string $emailCode): void
+    private function sendEmail(UserInterface $user, string $emailCode, string $recipientEmail): void
     {
         $this->emailSender->send(
             $emailCode,
-            [$user->getEmail()],
+            [$recipientEmail],
             [
                 'user' => $user,
                 'channel' => $this->channelContext->getChannel(),
