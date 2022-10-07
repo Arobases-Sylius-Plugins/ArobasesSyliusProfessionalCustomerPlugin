@@ -1,9 +1,9 @@
 arobases_sylius_professional_customer_shop:
-    resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/shop_routing.yml"
-    prefix: /{_locale}
-    requirements:
-        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+  resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/shop_routing.yml"
+  prefix: /{_locale}
+  requirements:
+    _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
 
 arobases_sylius_professional_customer_admin:
-    resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/admin_routing.yml"
-    prefix: /admin
+  resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/admin_routing.yml"
+  prefix: /admin

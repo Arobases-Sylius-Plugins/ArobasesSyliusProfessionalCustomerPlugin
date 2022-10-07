@@ -6,5 +6,11 @@ imports:
 sylius_mailer:
   emails:
     customer_pro_confirmation:
-      subject: "A product has become out of stock!"
-      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/customer_pro_confirmation.html.twig"
+      subject: "Welcome !"
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/customerProConfirmation.html.twig"
+    admin_customer_pro_notification:
+      subject: "A new customer pro ! "
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/adminCustomerProNotification.html.twig"
+    user_registration_pro:
+      subject: sylius.emails.user_registration.subject
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/userRegistrationPro.html.twig"

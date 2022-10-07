@@ -8,8 +8,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class KbisUploader extends FileUploader {
 
-    public function __construct(Filesystem $fileSystem, FileNameProvider $fileNameProvider, string $partnerBaseUploadPath, string $partnerComplementUploadPath )
+    public function __construct(Filesystem $fileSystem, FileNameProvider $fileNameProvider, string $kbisBaseUploadPath, string $kbisComplementUploadPath )
     {
-        parent::__construct($fileSystem, $fileNameProvider, $partnerBaseUploadPath, $partnerComplementUploadPath);
+        parent::__construct($fileSystem, $fileNameProvider, $kbisBaseUploadPath, $kbisComplementUploadPath);
     }
 }

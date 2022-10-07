@@ -2,8 +2,11 @@ arobases_sylius_professional_customer:
   email:
     wait_verification: Vous recevrez un mail quand vos informations professionnelles seront vérifiées.
     verification:
-      subject: 'Informations Clients Professionnelles verifiée'
-      verified: 'Vos informations Clients Professionnelles ont été verifiée, bienvenue'
+      subject: 'Informations Clients Professionnelles verifiées'
+      verified: 'Vos informations Clients Professionnelles ont été verifiées, bienvenue'
+    notification:
+      subject: "Un nouvel utilisateur professionnel vient de s'inscrire"
+      content: "Un nouvel utilisateur professionnel vient de s'inscrire, vous devez valider son compte dans votre back office."
   ui:
     professional_information: Informations Professionelles
     manage_your_business_information_and_preferences: Gérer vos informations et préférences professionnelles
