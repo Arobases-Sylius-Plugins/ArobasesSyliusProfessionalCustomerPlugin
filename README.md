@@ -6,8 +6,6 @@
 
 <h1 align="center">ArobasesSyliusProfessionalCustomerPlugin</h1>
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
-
 ## Documentation
 
 For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
