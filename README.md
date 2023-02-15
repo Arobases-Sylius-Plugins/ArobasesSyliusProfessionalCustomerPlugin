@@ -1,19 +1,8 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
-    </a>
-</p>
+<h1 align="center">Arobases Sylius Professional Customer Plugin</h1>
 
-<h1 align="center">ArobasesSyliusProfessionalCustomerPlugin</h1>
+![banner_arobases](https://user-images.githubusercontent.com/39689570/219096311-e5b17eaf-25d9-4194-9907-d11db858873f.jpg)
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
 
-## Documentation
-
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
-
-## Quickstart Installation
 
 ### 1. Require plugin with composer:
 ```sh
@@ -21,7 +10,7 @@ composer require arobases-sylius-public/sylius-professional-customer-plugin
 ```
 ### 3. Import configuration:
 ```yml
-#config/packages/arobases_sylius_professional_customer.yaml
+#config/packages/arobases_sylius_professional_customer_plugin.yaml
 imports:
     - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/config.yaml" }
 ```
@@ -29,13 +18,13 @@ imports:
 ### 4. Import routing:
 ```yml
 # config/routes.yaml
-arobases_sylius_professional_customer_shop:
+arobases_sylius_professional_customer_plugin_shop:
     resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/shop_routing.yml"
     prefix: /{_locale}
     requirements:
         _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
 
-arobases_sylius_professional_customer_admin:
+arobases_sylius_professional_customer_plugin_admin:
     resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/admin_routing.yml"
     prefix: /admin
 
