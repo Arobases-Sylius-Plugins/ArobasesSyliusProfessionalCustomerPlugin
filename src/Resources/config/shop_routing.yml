@@ -9,7 +9,7 @@ arobases_sylius_professional_customer_shop_register:
             event: register
             redirect:
                 route: sylius_shop_account_dashboard
-            flash: arobases_sylius_professional_customer:customer:register
+            flash: sylius.customer.register
 
 arobases_sylius_professional_customer_shop_account_dashboard:
     path: /pro_dashboard
