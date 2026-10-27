@@ -1,35 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arobases\SyliusProfessionalCustomerPlugin\Menu;
 
+use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 final class AccountMenuListener
 {
-    /**
-     * @var CustomerContextInterface
-     */
-    private $customerContext;
-
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
-    public function __construct(CustomerContextInterface $customerContext)
+    public function __construct(private CustomerContextInterface $customerContext)
     {
-        $this->customerContext = $customerContext;
     }
-
 
     public function addAccountMenuItems(MenuBuilderEvent $event): void
     {
-
-        if(false === $this->customerContext->getCustomer()->isPro()) {
+        $customer = $this->customerContext->getCustomer();
+        if (!$customer instanceof CustomerInterface || true !== $customer->isPro()) {
             return;
         }
-        $menu = $event->getMenu();
-        $menu
-            ->addChild('new', ['route' => 'arobases_sylius_professional_customer_shop_account_dashboard'])
+
+        $event->getMenu()
+            ->addChild('professional_information', ['route' => 'arobases_sylius_professional_customer_shop_account_dashboard'])
             ->setLabel('arobases_sylius_professional_customer.menu.ui.professional_information')
             ->setLabelAttribute('icon', 'star')
         ;

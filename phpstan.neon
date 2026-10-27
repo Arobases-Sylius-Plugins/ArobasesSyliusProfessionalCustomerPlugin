@@ -1,8 +1,10 @@
 parameters:
+    level: max
     reportUnmatchedIgnoredErrors: false
-    checkMissingIterableValueType: false
+    paths:
+        - src
 
-    excludes_analyse:
+    excludePaths:
         # Makes PHPStan crash
         - 'src/DependencyInjection/Configuration.php'
 
@@ -12,3 +14,8 @@ parameters:
 
     ignoreErrors:
         - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given\./'
+        - identifier: missingType.iterableValue
+        # The decorated Sylius mailer listener is final and has no interface
+        -
+            message: '/Call to an undefined method object::send[A-Za-z]+Email\(\)\./'
+            path: src/EventListener/MailerListener.php

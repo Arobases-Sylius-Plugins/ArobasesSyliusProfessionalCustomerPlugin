@@ -5,7 +5,7 @@
          colors="true"
          bootstrap="tests/Application/config/bootstrap.php">
     <testsuites>
-        <testsuite name="AcmeSyliusExamplePlugin Test Suite">
+        <testsuite name="ArobasesSyliusProfessionalCustomerPlugin Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
@@ -18,5 +18,10 @@
 
         <env name="APP_ENV" value="test"/>
         <env name="SHELL_VERBOSITY" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="dev"/>
+        <env name="APP_SECRET" value="145dacd26ea8f3acd8facecbfa5ce653"/>
+        <!-- ###- symfony/framework-bundle ### -->
     </php>
 </phpunit>

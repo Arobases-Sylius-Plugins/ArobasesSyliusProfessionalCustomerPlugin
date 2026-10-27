@@ -1,21 +1,18 @@
 services:
-  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader:
-    parent: Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploader
+  Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider:
+    arguments:
+      - '@filesystem'
 
-  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploader:
+  Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader:
     arguments:
       - '@filesystem'
       - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider'
       - '%kernel.project_dir%/public/'
-      - 'userfiles/kbis'
-
-  Arobases\SyliusProfessionalCustomerPlugin\Files\Provider\FileNameProvider:
-    arguments:
-      - '@filesystem'
+      - 'userfiles/kbis/'
 
   Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProKbisListener:
     arguments:
       - '@Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader'
       - '@doctrine.orm.entity_manager'
     tags:
-      - { name: kernel.event_listener , event: sylius.customer.post_register, method: preCreate } #sylius_event_listener
+      - { name: kernel.event_listener, event: sylius.customer.post_register, method: preCreate }

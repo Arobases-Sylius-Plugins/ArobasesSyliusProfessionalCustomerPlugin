@@ -4,55 +4,35 @@ declare(strict_types=1);
 
 namespace Arobases\SyliusProfessionalCustomerPlugin\EventListener;
 
-use Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\KbisUploader;
-use Doctrine\ORM\EntityManager;
+use Arobases\SyliusProfessionalCustomerPlugin\Files\Uploader\FileUploaderInterface;
+use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class CustomerProKbisListener {
-
-    private KbisUploader  $kbisUploader;
-    private EntityManager $em;
-
-    /**
-     * @param KbisUploader $kbisUploader
-     * @param EntityManager $em
-     */
-    public function __construct(KbisUploader $kbisUploader, EntityManager $em)
-    {
-        $this->kbisUploader = $kbisUploader;
-        $this->em = $em;
+final class CustomerProKbisListener
+{
+    public function __construct(
+        private FileUploaderInterface $kbisUploader,
+        private EntityManagerInterface $entityManager,
+    ) {
     }
 
     public function preCreate(GenericEvent $event): void
     {
-
-        $file = $event->getSubject()->getFile();
-
-        if ($file !== null) {
-            $pathFile = $this->kbisUploader->upload($file);
-
-            $customer = $event->getSubject();
-            $customer->setFilePath($pathFile);
-
-            $this->em->persist($customer);
-            $this->em->flush();
+        $customer = $event->getSubject();
+        if (!$customer instanceof CustomerInterface) {
+            return;
         }
 
-    }
+        $file = $customer->getFile();
+        if (!$file instanceof UploadedFile) {
+            return;
+        }
 
-    public function preUpdate(GenericEvent $event): void{
+        $customer->setFilePath($this->kbisUploader->upload($file));
 
-        $file = $event->getSubject()->getFile();
-
-        if($file === null)
-            throw new BadRequestHttpException();
-
-        $pathFile = $this->kbisUploader->upload($file);
-        $customer = $event->getSubject();
-        $customer->setFilePath($pathFile);
-
-        $this->em->persist($customer);
-        $this->em->flush();
+        $this->entityManager->persist($customer);
+        $this->entityManager->flush();
     }
 }

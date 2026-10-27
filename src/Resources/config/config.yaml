@@ -14,3 +14,26 @@ sylius_mailer:
     user_registration_pro:
       subject: sylius.emails.user_registration.subject
       template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/userRegistrationPro.html.twig"
+
+sylius_ui:
+  events:
+    sylius.admin.customer.form.second_column:
+      blocks:
+        arobases_professional_customer:
+          template: "@ArobasesSyliusProfessionalCustomerPlugin/Admin/Customer/Form/_professionalCustomer.html.twig"
+          priority: 5
+    sylius.admin.channel.form.second_column_content:
+      blocks:
+        arobases_professional_customer:
+          template: "@ArobasesSyliusProfessionalCustomerPlugin/Admin/Channel/Form/_professionalCustomer.html.twig"
+          priority: 5
+    sylius.shop.register.after_content_header:
+      blocks:
+        arobases_register_as_professional:
+          template: "@ArobasesSyliusProfessionalCustomerPlugin/Shop/_registerAsProfessional.html.twig"
+          priority: 5
+    sylius.shop.login.register_column:
+      blocks:
+        arobases_register_as_professional:
+          template: "@ArobasesSyliusProfessionalCustomerPlugin/Shop/_registerAsProfessional.html.twig"
+          priority: 7

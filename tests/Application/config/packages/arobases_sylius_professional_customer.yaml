@@ -1,2 +1,2 @@
 imports:
-  - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/config.yaml" }
+    - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/config.yaml" }

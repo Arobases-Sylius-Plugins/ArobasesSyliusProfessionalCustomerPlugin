@@ -1,17 +1,14 @@
 services:
   arobases_sylius_professional_customer_plugin.promotion_rule_checker.professional_customer:
-      class: Arobases\SyliusProfessionalCustomerPlugin\Promotion\Checker\Rule\ProfessionalCustomerRuleChecker
-      tags:
-        - { name: sylius.promotion_rule_checker, type: professional_customer, form_type: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Rule\ProfessionalCustomerConfigurationType, label: Professional Customer }
+    class: Arobases\SyliusProfessionalCustomerPlugin\Promotion\Checker\Rule\ProfessionalCustomerRuleChecker
+    tags:
+      - { name: sylius.promotion_rule_checker, type: professional_customer, form_type: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Rule\ProfessionalCustomerConfigurationType, label: Professional Customer }
 
   Arobases\SyliusProfessionalCustomerPlugin\Component\Core\OrderProcessing\OrderTaxesProcessor:
     decorates: sylius.order_processing.order_taxes_processor
     arguments:
-      - '@sylius.provider.channel_based_default_zone_provider'
-      - '@sylius.zone_matcher'
-      - '@sylius.registry.tax_calculation_strategy'
+      - '@.inner'
       - '@sylius.context.customer'
-      - '@sylius.context.channel'
 
   Arobases\SyliusProfessionalCustomerPlugin\Menu\AccountMenuListener:
     arguments:
@@ -20,8 +17,9 @@ services:
       - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }
 
   Arobases\SyliusProfessionalCustomerPlugin\EventListener\MailerListener:
-    decorates: 'sylius.listener.user_mailer_listener'
+    decorates: sylius.listener.user_mailer_listener
     arguments:
+      - '@.inner'
       - '@sylius.email_sender'
       - '@sylius.context.channel'
       - '@sylius.context.locale'
@@ -31,15 +29,13 @@ services:
       - '@sylius.email_sender'
       - '@sylius.context.channel'
       - '@sylius.context.locale'
-      - "@sylius.repository.customer"
     tags:
-      - { name: kernel.event_listener , event: sylius.user.post_email_verification, method: sendCustomerProVerifiedEmail }
+      - { name: kernel.event_listener, event: sylius.user.post_email_verification, method: sendCustomerProVerifiedEmail }
 
   Arobases\SyliusProfessionalCustomerPlugin\EventListener\CustomerProAcceptedListener:
     arguments:
       - '@sylius.email_sender'
       - '@sylius.context.channel'
       - '@sylius.context.locale'
-      - "@sylius.repository.customer"
     tags:
-      - { name: kernel.event_listener , event: sylius.customer.pre_update, method: sendCustomerProAcceptedEmail }
+      - { name: kernel.event_listener, event: sylius.customer.pre_update, method: sendCustomerProAcceptedEmail }

@@ -9,9 +9,9 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ChannelTypeExtension extends AbstractTypeExtension {
-
-    public static function getExtendedTypes(): array
+final class ChannelTypeExtension extends AbstractTypeExtension
+{
+    public static function getExtendedTypes(): iterable
     {
         return [ChannelType::class];
     }
@@ -20,22 +20,7 @@ class ChannelTypeExtension extends AbstractTypeExtension {
     {
         $builder->add('considerTaxesForProfessionalCustomer', CheckboxType::class, [
             'label' => 'arobases_sylius_professional_customer.admin.consider_taxes_for_professional_customer',
+            'required' => false,
         ]);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

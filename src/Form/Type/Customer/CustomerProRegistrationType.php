@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer;
 
+use Arobases\SyliusProfessionalCustomerPlugin\Model\CustomerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Customer\Model\Customer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class CustomerProRegistrationType extends AbstractResourceType
 {
@@ -67,19 +67,17 @@ final class CustomerProRegistrationType extends AbstractResourceType
                         'maxSize' => '20M',
                         'mimeTypes' => [
                             'application/pdf',
-
                         ],
-                        'mimeTypesMessage' => 'arobases_sylius_professional_customer.form.customer_pro.mime_types_message'
-                    ])
-                ]
-
+                        'mimeTypesMessage' => 'arobases_sylius_professional_customer.form.customer_pro.mime_types_message',
+                    ]),
+                ],
             ])
-
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-                /** @var Customer $customer */
-                 $customer = $event->getData();
-                 $customer->setIsPro(true);
-            });
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+                $customer = $event->getData();
+                if ($customer instanceof CustomerInterface) {
+                    $customer->setIsPro(true);
+                }
+            })
         ;
     }
 

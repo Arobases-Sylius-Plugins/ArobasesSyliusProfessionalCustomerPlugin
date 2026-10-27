@@ -2,7 +2,7 @@ arobases_sylius_professional_customer_shop_register:
     path: /pro_register
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.customer:createAction
+        _controller: sylius.controller.customer::createAction
         _sylius:
             template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/pro_register.html.twig"
             form: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer\CustomerProRegistrationType
@@ -15,7 +15,7 @@ arobases_sylius_professional_customer_shop_account_dashboard:
     path: /pro_dashboard
     methods: [GET]
     defaults:
-        _controller: sylius.controller.customer:showAction
+        _controller: sylius.controller.customer::showAction
         _sylius:
             template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Account/dashboard_pro.html.twig"
             repository:
