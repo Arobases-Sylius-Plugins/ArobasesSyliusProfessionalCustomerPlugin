@@ -1,4 +1,4 @@
-# UPGRADE FROM `2.x` TO `3.0` (Sylius 1.14)
+# UPGRADE FROM `3.x` TO `4.0` (Sylius 1.14)
 
 * Requires Sylius `~1.14.0` and PHP 8.2 or 8.3.
 * The model traits are now mapped with Doctrine attributes (annotations are kept), you can switch your
