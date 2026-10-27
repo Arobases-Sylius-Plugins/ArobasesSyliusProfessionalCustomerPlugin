@@ -9,31 +9,24 @@ use Symfony\Component\HttpFoundation\File\File;
 
 trait CustomerTrait
 {
-    /** @ORM\Column(type="boolean", nullable=true) */
     #[ORM\Column(type: 'boolean', nullable: true)]
     protected ?bool $isPro = false;
 
-    /** @ORM\Column(type="boolean", nullable=true) */
     #[ORM\Column(type: 'boolean', nullable: true)]
     protected ?bool $isProVerified = false;
 
-    /** @ORM\Column(type="boolean", nullable=true, options={"default":"0"}) */
     #[ORM\Column(type: 'boolean', nullable: true, options: ['default' => '0'])]
     protected ?bool $proVerifiedEmailSend = false;
 
-    /** @ORM\Column(type="text", nullable=true) */
     #[ORM\Column(type: 'text', nullable: true)]
     protected ?string $businessRegistrationNumber = null;
 
-    /** @ORM\Column(type="text", nullable=true) */
     #[ORM\Column(type: 'text', nullable: true)]
     protected ?string $socialReason = null;
 
-    /** @ORM\Column(type="text", nullable=true) */
     #[ORM\Column(type: 'text', nullable: true)]
     protected ?string $vatNumber = null;
 
-    /** @ORM\Column(type="string", length=511, nullable=true) */
     #[ORM\Column(type: 'string', length: 511, nullable: true)]
     protected ?string $filePath = null;
 

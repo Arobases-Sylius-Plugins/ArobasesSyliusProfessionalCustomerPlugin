@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait ChannelTrait
 {
-    /** @ORM\Column(type="boolean", nullable=true) */
     #[ORM\Column(type: 'boolean', nullable: true)]
     protected ?bool $considerTaxesForProfessionalCustomer = false;
 

@@ -17,7 +17,7 @@ services:
       - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }
 
   Arobases\SyliusProfessionalCustomerPlugin\EventListener\MailerListener:
-    decorates: sylius.listener.user_mailer_listener
+    decorates: sylius.listener.user_mailer
     arguments:
       - '@.inner'
       - '@sylius.email_sender'

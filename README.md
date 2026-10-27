@@ -20,14 +20,14 @@
 | 3.x            | ~1.14.0        | 8.2 / 8.3   | `1.14`       |
 | 2.x            | ~1.9.0         | ^7.3        |              |
 
-This branch is the **Sylius 1.14** version.
+This branch is the **Sylius 2.3** version. For Sylius 1.14, use the `1.14` branch (plugin 3.x).
 
 ## Installation
 
 ### 1. Require the plugin with composer
 
 ```bash
-composer require arobases-sylius-public/sylius-professional-customer-plugin:^3.0
+composer require arobases-sylius-public/sylius-professional-customer-plugin:^4.0
 ```
 
 ### 2. Add the plugin class to your `config/bundles.php`
@@ -108,7 +108,7 @@ class Channel extends BaseChannel implements ChannelInterface
 }
 ```
 
-The traits are mapped with both Doctrine attributes and annotations, so they work whatever the mapping type of your entities.
+The traits are mapped with Doctrine attributes.
 
 ### 7. Update the database schema
 
@@ -119,25 +119,33 @@ bin/console doctrine:migrations:migrate
 
 ### 8. Templates
 
-Nothing to copy: the plugin adds its blocks through Sylius template events:
+Nothing to copy: the plugin adds its blocks through Sylius Twig hooks (`src/Resources/config/twig_hooks.yaml`):
 
-| Template event                                  | Content                                              |
-|-------------------------------------------------|------------------------------------------------------|
-| `sylius.admin.customer.form.second_column`      | Professional fields and KBIS on the customer form    |
-| `sylius.admin.channel.form.second_column_content` | "Consider taxes for professional customer" option |
-| `sylius.shop.register.after_content_header`     | "Register as professional" link                      |
-| `sylius.shop.login.register_column`             | "Register as professional" link                      |
+| Hook                                                                  | Content                                           |
+|-----------------------------------------------------------------------|---------------------------------------------------|
+| `sylius_admin.customer.{create,update}.content.form.sections#right`  | Professional fields and KBIS on the customer form |
+| `sylius_admin.customer.show.content.sections`                         | Professional information on the customer page     |
+| `sylius_admin.channel.{create,update}.content.form.sections`          | "Consider taxes for professional customer" option |
+| `sylius_shop.account.register.content.header`                         | "Register as professional" link                   |
+| `sylius_shop.account.login.content.register_container`                | "Register as professional" link                   |
 
-They can be disabled or moved with the `sylius_ui.events` configuration (block name: `arobases_professional_customer` / `arobases_register_as_professional`).
+The professional registration page reuses the Sylius registration form sections
+(`sylius_shop.account.register.content.form`) and adds its own under
+`arobases_sylius_professional_customer.shop.account.pro_register.content.form`.
+The professional information page uses the `arobases_sylius_professional_customer.shop.account.pro_dashboard` hooks.
+
+Every block can be disabled or moved with the `sylius_twig_hooks` configuration (hookable names:
+`professional_customer`, `register_as_professional`, `professional_information`).
 
 KBIS files are stored in `public/userfiles/kbis/`.
 
 ## Development
 
+The test application is [sylius/test-application](https://github.com/Sylius/TestApplication), configured in `tests/TestApplication`.
+
 ```bash
 composer install
-(cd tests/Application && yarn install && yarn build)
-(cd tests/Application && bin/console doctrine:database:create && bin/console doctrine:schema:create && bin/console sylius:fixtures:load -n)
+composer test-app-init
 vendor/bin/ecs check
 vendor/bin/phpstan analyse
 ```

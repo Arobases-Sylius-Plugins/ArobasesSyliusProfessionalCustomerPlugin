@@ -1,0 +1,9 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="mb-5">
+    <h2 class="h4 mb-3">{{ 'arobases_sylius_professional_customer.ui.professional_information'|trans }}</h2>
+    {{ form_row(form.businessRegistrationNumber) }}
+    {{ form_row(form.socialReason) }}
+    {{ form_row(form.vatNumber) }}
+    {{ form_row(form.file) }}
+</div>

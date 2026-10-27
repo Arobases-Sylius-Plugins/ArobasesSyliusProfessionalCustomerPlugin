@@ -1,0 +1,6 @@
+{% extends '@SyliusShop/account/common/index.html.twig' %}
+
+{% set prefixes = ['arobases_sylius_professional_customer.shop.account.pro_dashboard'] %}
+{% set attrs = { customer } %}
+
+{% block title %}{{ 'arobases_sylius_professional_customer.ui.professional_information'|trans }} | {{ parent() }}{% endblock %}

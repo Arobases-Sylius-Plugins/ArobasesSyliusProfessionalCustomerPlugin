@@ -1,0 +1,23 @@
+{% set form = hookable_metadata.context.form %}
+{% set customer = hookable_metadata.context.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'arobases_sylius_professional_customer.ui.professional_information'|trans }}</div>
+    </div>
+    <div class="card-body">
+        {{ form_row(form.isPro) }}
+        {% if form.isProVerified is defined %}
+            {{ form_row(form.isProVerified) }}
+            {{ form_row(form.businessRegistrationNumber) }}
+            {{ form_row(form.socialReason) }}
+            {{ form_row(form.vatNumber) }}
+        {% endif %}
+        {% if customer.filePath|default(null) is not null %}
+            <div class="mb-3">
+                <div class="form-label">{{ 'arobases_sylius_professional_customer.ui.kbis'|trans }}</div>
+                <a href="{{ asset(customer.filePath) }}" target="_blank">{{ 'arobases_sylius_professional_customer.ui.download'|trans }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>

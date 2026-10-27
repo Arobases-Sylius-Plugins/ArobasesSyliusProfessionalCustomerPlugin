@@ -1,16 +1,26 @@
-# UPGRADE FROM `2.x` TO `3.0` (Sylius 1.14)
+# UPGRADE FROM `3.x` TO `4.0` (Sylius 2.3)
 
-* Requires Sylius `~1.14.0` and PHP 8.2 or 8.3.
-* The model traits are now mapped with Doctrine attributes (annotations are kept), you can switch your
-  `Customer` and `Channel` entities to attributes.
-* The template overrides described in the previous README (`SyliusAdminBundle/Customer/_form.html.twig`,
-  `SyliusAdminBundle/Channel/_form.html.twig`, `SyliusShopBundle/Menu/_security.html.twig`) are no longer needed:
-  the plugin now uses Sylius template events. Remove your overrides, or keep them and disable the plugin blocks
-  in `sylius_ui.events`.
-* `OrderTaxesProcessor` and `MailerListener` now decorate the Sylius services and delegate to them instead of
-  replacing them. Their constructors changed accordingly.
-* `CustomerProAcceptedListener` and `CustomerProVerifiedListener` no longer take the customer repository.
-* `CustomerProKbisListener::preUpdate()` has been removed (it was not used).
-* KBIS files are now stored in `public/userfiles/kbis/` (they were stored in `public/userfiles/` with a `kbis` prefix
-  in their name). Existing files keep working since their path is saved on the customer.
-* The routes use the `service::method` controller notation required by Symfony 6.
+* Requires Sylius `^2.3` and PHP `^8.2`.
+* The model traits are only mapped with Doctrine attributes (Doctrine ORM 3 dropped annotations):
+  map your `Customer` and `Channel` entities with attributes.
+* The Semantic UI templates and the Sylius 1.x template events have been replaced by Twig hooks
+  (see `src/Resources/config/twig_hooks.yaml`). Template paths changed:
+
+  | 3.x                                                    | 4.x                                                  |
+  |--------------------------------------------------------|------------------------------------------------------|
+  | `CustomerPro/pro_register.html.twig`                   | `shop/account/pro_register.html.twig`                |
+  | `CustomerPro/Account/dashboard_pro.html.twig`          | `shop/account/pro_dashboard.html.twig`               |
+  | `CustomerPro/Email/userRegistrationPro.html.twig`      | `email/user_registration_pro.html.twig`              |
+  | `CustomerPro/Email/customerProConfirmation.html.twig`  | `email/customer_pro_confirmation.html.twig`          |
+  | `CustomerPro/Email/adminCustomerProNotification.html.twig` | `email/admin_customer_pro_notification.html.twig` |
+  | `Admin/Customer/Form/_professionalCustomer.html.twig`  | `admin/customer/form/sections/professional_customer.html.twig` |
+  | `Admin/Channel/Form/_professionalCustomer.html.twig`   | `admin/channel/form/sections/professional_customer.html.twig`  |
+  | `Shop/_registerAsProfessional.html.twig`               | `shop/account/register_as_professional.html.twig`    |
+
+  Template overrides made for 3.x must be rewritten for the Sylius 2 (Bootstrap) shop and admin.
+* `MailerListener` now decorates `sylius.listener.user_mailer` (`sylius.listener.user_mailer_listener` no longer
+  exists) and no longer has `sendResetPasswordPinEmail()`.
+* After a professional registration, the customer is redirected to the Sylius "thank you" page
+  (`sylius_shop_register_thank_you`) instead of the account dashboard.
+* The account menu entry uses the `tabler:briefcase` icon.
+* The test application is now `sylius/test-application` (`tests/TestApplication`).

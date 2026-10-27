@@ -1,0 +1,12 @@
+{% set form = hookable_metadata.context.form %}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+{{ form_start(form, {'action': path('arobases_sylius_professional_customer_shop_register'), 'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {# Reuses the Sylius registration form sections (personal information, credentials, buttons) #}
+    {% hook 'form' with { form, _prefixes: ['arobases_sylius_professional_customer.shop.account.pro_register.content', 'sylius_shop.account.register.content'] } %}
+
+    {% if form._token is defined %}
+        {{ form_row(form._token) }}
+    {% endif %}
+{{ form_end(form, {'render_rest': false}) }}

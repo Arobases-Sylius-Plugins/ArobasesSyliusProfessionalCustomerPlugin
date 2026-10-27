@@ -33,11 +33,6 @@ final class MailerListener
         $this->decoratedMailerListener->sendResetPasswordTokenEmail($event);
     }
 
-    public function sendResetPasswordPinEmail(GenericEvent $event): void
-    {
-        $this->decoratedMailerListener->sendResetPasswordPinEmail($event);
-    }
-
     public function sendVerificationTokenEmail(GenericEvent $event): void
     {
         $this->decoratedMailerListener->sendVerificationTokenEmail($event);

@@ -1,0 +1,70 @@
+sylius_twig_hooks:
+    hooks:
+        # Shop - professional registration page
+        'arobases_sylius_professional_customer.shop.account.pro_register':
+            content:
+                template: '@SyliusShop/account/register/content.html.twig'
+                priority: 0
+
+        'arobases_sylius_professional_customer.shop.account.pro_register.content':
+            header:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_register/content/header.html.twig'
+                priority: 100
+            form:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_register/content/form.html.twig'
+                priority: 0
+
+        # Merged with the "sylius_shop.account.register.content.form" hookables
+        'arobases_sylius_professional_customer.shop.account.pro_register.content.form':
+            professional_information:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_register/content/form/professional_information.html.twig'
+                priority: 50
+
+        # Shop - "Register as professional" links
+        'sylius_shop.account.register.content.header':
+            register_as_professional:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/register_as_professional.html.twig'
+                priority: -100
+
+        'sylius_shop.account.login.content.register_container':
+            register_as_professional:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/register_as_professional.html.twig'
+                priority: -100
+
+        # Shop - professional information page
+        'arobases_sylius_professional_customer.shop.account.pro_dashboard.index.content.main':
+            section:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_dashboard/content/main/section.html.twig'
+                priority: 0
+
+        'arobases_sylius_professional_customer.shop.account.pro_dashboard.index.content.main.header':
+            title:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_dashboard/content/main/header/title.html.twig'
+                priority: 0
+
+        # Admin - customer
+        'sylius_admin.customer.create.content.form.sections#right':
+            professional_customer:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/admin/customer/form/sections/professional_customer.html.twig'
+                priority: -100
+
+        'sylius_admin.customer.update.content.form.sections#right':
+            professional_customer:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/admin/customer/form/sections/professional_customer.html.twig'
+                priority: -100
+
+        'sylius_admin.customer.show.content.sections':
+            professional_customer:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/admin/customer/show/content/sections/professional_customer.html.twig'
+                priority: -100
+
+        # Admin - channel
+        'sylius_admin.channel.create.content.form.sections':
+            professional_customer:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/admin/channel/form/sections/professional_customer.html.twig'
+                priority: -100
+
+        'sylius_admin.channel.update.content.form.sections':
+            professional_customer:
+                template: '@ArobasesSyliusProfessionalCustomerPlugin/admin/channel/form/sections/professional_customer.html.twig'
+                priority: -100

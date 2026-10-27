@@ -1,0 +1,7 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% block title %}{{ 'arobases_sylius_professional_customer.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    {% hook 'arobases_sylius_professional_customer.shop.account.pro_register' with { form } %}
+{% endblock %}

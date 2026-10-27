@@ -24,7 +24,7 @@ final class AccountMenuListener
         $event->getMenu()
             ->addChild('professional_information', ['route' => 'arobases_sylius_professional_customer_shop_account_dashboard'])
             ->setLabel('arobases_sylius_professional_customer.menu.ui.professional_information')
-            ->setLabelAttribute('icon', 'star')
+            ->setLabelAttribute('icon', 'tabler:briefcase')
         ;
     }
 }

@@ -4,12 +4,12 @@ arobases_sylius_professional_customer_shop_register:
     defaults:
         _controller: sylius.controller.customer::createAction
         _sylius:
-            template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/pro_register.html.twig"
+            template: "@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_register.html.twig"
             form: Arobases\SyliusProfessionalCustomerPlugin\Form\Type\Customer\CustomerProRegistrationType
             event: register
             redirect:
-                route: sylius_shop_account_dashboard
-            flash: arobases_sylius_professional_customer:customer:register
+                route: sylius_shop_register_thank_you
+            flash: arobases_sylius_professional_customer.customer.register
 
 arobases_sylius_professional_customer_shop_account_dashboard:
     path: /pro_dashboard
@@ -17,7 +17,7 @@ arobases_sylius_professional_customer_shop_account_dashboard:
     defaults:
         _controller: sylius.controller.customer::showAction
         _sylius:
-            template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Account/dashboard_pro.html.twig"
+            template: "@ArobasesSyliusProfessionalCustomerPlugin/shop/account/pro_dashboard.html.twig"
             repository:
                 method: find
                 arguments:

@@ -2,38 +2,16 @@ imports:
   - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/grids.yaml" }
   - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/files_uploader.yaml" }
   - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/forms.yaml" }
+  - { resource: "@ArobasesSyliusProfessionalCustomerPlugin/Resources/config/twig_hooks.yaml" }
 
 sylius_mailer:
   emails:
     customer_pro_confirmation:
       subject: "Welcome !"
-      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/customerProConfirmation.html.twig"
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/email/customer_pro_confirmation.html.twig"
     admin_customer_pro_notification:
       subject: "A new customer pro ! "
-      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/adminCustomerProNotification.html.twig"
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/email/admin_customer_pro_notification.html.twig"
     user_registration_pro:
       subject: sylius.emails.user_registration.subject
-      template: "@ArobasesSyliusProfessionalCustomerPlugin/CustomerPro/Email/userRegistrationPro.html.twig"
-
-sylius_ui:
-  events:
-    sylius.admin.customer.form.second_column:
-      blocks:
-        arobases_professional_customer:
-          template: "@ArobasesSyliusProfessionalCustomerPlugin/Admin/Customer/Form/_professionalCustomer.html.twig"
-          priority: 5
-    sylius.admin.channel.form.second_column_content:
-      blocks:
-        arobases_professional_customer:
-          template: "@ArobasesSyliusProfessionalCustomerPlugin/Admin/Channel/Form/_professionalCustomer.html.twig"
-          priority: 5
-    sylius.shop.register.after_content_header:
-      blocks:
-        arobases_register_as_professional:
-          template: "@ArobasesSyliusProfessionalCustomerPlugin/Shop/_registerAsProfessional.html.twig"
-          priority: 5
-    sylius.shop.login.register_column:
-      blocks:
-        arobases_register_as_professional:
-          template: "@ArobasesSyliusProfessionalCustomerPlugin/Shop/_registerAsProfessional.html.twig"
-          priority: 7
+      template: "@ArobasesSyliusProfessionalCustomerPlugin/email/user_registration_pro.html.twig"

@@ -1,0 +1,43 @@
+{% set customer = hookable_metadata.context.resource %}
+
+{% if customer.isPro %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <div class="card-title">{{ 'arobases_sylius_professional_customer.ui.professional_information'|trans }}</div>
+        </div>
+        <div class="card-body">
+            <div class="datagrid">
+                <div class="datagrid-item">
+                    <div class="datagrid-title">{{ 'arobases_sylius_professional_customer.admin.is_pro_verified'|trans }}</div>
+                    <div class="datagrid-content">
+                        {% if customer.isProVerified %}
+                            <span class="badge bg-success-lt">{{ 'sylius.ui.yes_label'|trans }}</span>
+                        {% else %}
+                            <span class="badge bg-danger-lt">{{ 'sylius.ui.no_label'|trans }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="datagrid-item">
+                    <div class="datagrid-title">{{ 'arobases_sylius_professional_customer.form.customer_pro.socialReason'|trans }}</div>
+                    <div class="datagrid-content">{{ customer.socialReason }}</div>
+                </div>
+                <div class="datagrid-item">
+                    <div class="datagrid-title">{{ 'arobases_sylius_professional_customer.form.customer_pro.business_registration_number.label'|trans }}</div>
+                    <div class="datagrid-content">{{ customer.businessRegistrationNumber }}</div>
+                </div>
+                <div class="datagrid-item">
+                    <div class="datagrid-title">{{ 'arobases_sylius_professional_customer.form.customer_pro.vatNumber'|trans }}</div>
+                    <div class="datagrid-content">{{ customer.vatNumber }}</div>
+                </div>
+                {% if customer.filePath is not null %}
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">{{ 'arobases_sylius_professional_customer.ui.kbis'|trans }}</div>
+                        <div class="datagrid-content">
+                            <a href="{{ asset(customer.filePath) }}" target="_blank">{{ 'arobases_sylius_professional_customer.ui.download'|trans }}</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -11,8 +11,6 @@
 /behat.yml
 /phpspec.yml
 /phpunit.xml
-/.idea
-/.idea/*
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -36,6 +34,16 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+
+/tests/TestApplication/.env.local
+/tests/TestApplication/.env.*.local
+/public/userfiles/
+
+/.idea
