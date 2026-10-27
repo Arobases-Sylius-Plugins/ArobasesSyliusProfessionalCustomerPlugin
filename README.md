@@ -16,18 +16,19 @@
 
 | Plugin version | Sylius version | PHP version | Branch       |
 |----------------|----------------|-------------|--------------|
-| 4.x            | ^2.3           | ^8.2        | `sylius-2.3` |
-| 3.x            | ~1.14.0        | 8.2 / 8.3   | `1.14`       |
+| 5.x            | ^2.3           | ^8.2        | `sylius-2.3` |
+| 4.x            | ~1.14.0        | 8.2 / 8.3   | `1.14`       |
+| 3.x            | ^1.9           |             |              |
 | 2.x            | ~1.9.0         | ^7.3        |              |
 
-This branch is the **Sylius 2.3** version. For Sylius 1.14, use the `1.14` branch (plugin 3.x).
+This branch is the **Sylius 2.3** version. For Sylius 1.14, use the `1.14` branch (plugin 4.x).
 
 ## Installation
 
 ### 1. Require the plugin with composer
 
 ```bash
-composer require arobases-sylius-public/sylius-professional-customer-plugin:^4.0
+composer require arobases-sylius-public/sylius-professional-customer-plugin:^5.0
 ```
 
 ### 2. Add the plugin class to your `config/bundles.php`

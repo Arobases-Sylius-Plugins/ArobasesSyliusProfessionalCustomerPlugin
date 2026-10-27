@@ -55,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-sylius-2.3": "4.0-dev"
+            "dev-sylius-2.3": "5.0-dev"
         },
         "symfony": {
             "require": "^7.4"
